@@ -1,0 +1,202 @@
+
+Css code
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+
+body {
+   font-family: "Poppins", sans-serif;
+   background-color: #f4f4f4;
+   color: #333;
+   line-height: 1.6;
+}
+
+
+html {
+   scroll-behavior: smooth;
+}
+
+
+nav {
+   background-color: #343a40;
+   padding: 15px;
+   text-align: center;
+}
+
+
+.nav-links {
+   display: flex;
+   justify-content: center;
+   gap: 2rem;
+   list-style: none;
+   font-size: 1.2rem;
+}
+
+
+.nav-links a {
+   color: white;
+   text-decoration: none;
+   transition: color 0.3s;
+}
+
+
+.nav-links a:hover {
+   color: #ffdd57;
+   text-decoration: underline;
+}
+
+
+.logo {
+   font-size: 2rem;
+   color: white;
+   font-weight: bold;
+   text-align: center;
+}
+
+
+.container {
+   max-width: 900px;
+   margin: 40px auto;
+   padding: 40px;
+   background-color: white;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   border-radius: 10px;
+   text-align: center;
+}
+
+
+h1, h2 {
+   font-size: 2.5rem;
+   color: #343a40;
+   margin-bottom: 15px;
+}
+
+
+p {
+   font-size: 1.1rem;
+   color: rgb(85, 85, 85);
+   line-height: 1.6;
+   margin-bottom: 20px;
+}
+
+
+.button {
+   display: inline-block;
+   background-color: #b9d9fb;
+   color: rgb(40, 45, 50);
+   padding: 12px 24px;
+   border-radius: 5px;
+   text-decoration: none;
+   font-weight: bold;
+   transition: background-color 0.3s;
+}
+
+
+.button:hover {
+   background-color: #b9d9fb;
+}
+
+
+/* Sections */
+section {
+   padding: 60px 20px;
+   text-align: center;
+}
+
+
+.splash {
+   background: linear-gradient(to right, #b9d9fb, #9accfb);
+   color: white;
+   padding: 100px 20px;
+   border-radius: 0 0 30px 30px;
+}
+
+
+ul {
+
+  list-style: none;
+   padding: 0;
+}
+
+
+ul li {
+   margin: 10px 0;
+   font-size: 1.2rem;
+}
+
+
+ul li a {
+   color: #343a40;
+   text-decoration: none;
+   /* font-weight: bold; */
+}
+
+
+ul li a:hover {
+   text-decoration: underline;
+}
+
+
+footer {
+   background-color: #dae6f1;
+   color: ADD8E6;
+   text-align: center;
+   padding: 20px;
+   margin-top: 40px;
+   font-size: 1rem;
+}
+
+
+
+
+/* Centered Buttons */
+.buttons {
+   margin-bottom: 20px;
+   display: flex;
+   justify-content: center;
+   gap: 15px;
+}
+
+
+/* Baby Blue Buttons */
+.profile-btn {
+   background-color: #b9d9fb; /* Baby blue */
+   border: none;
+   color: #333; /* Dark gray for contrast */
+   padding: 12px 24px;
+   font-size: 16px;
+   font-weight: 500;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+.profile-btn:hover {
+   background-color: #9ac7db; /* Slightly darker baby blue */
+   transform: scale(1.05);
+}
+
+
+.profile-btn:active {
+   transform: scale(0.95);
+}
+
+
+/* Description Box */
+.description {
+   font-size: 16px;
+   line-height: 1.6;
+   padding: 15px;
+   background: #f0f8ff; /* Very light baby blue background */
+   border-left: 5px solid #ADD8E6; /* Baby blue border */
+   border-radius: 5px;
+   max-width: 600px;
+   margin: 20px auto;
