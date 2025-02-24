@@ -201,3 +201,5 @@ footer {
    border-radius: 5px;
    max-width: 600px;
    margin: 20px auto;
+   display: none;
+}
