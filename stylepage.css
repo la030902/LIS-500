@@ -248,6 +248,7 @@ footer {
  {
    max-width: 100%;
    height: auto;
-   object-fit: : cover;
-   border-radius: 10px;
+   display: block;
+   margin: 10px auto;
+   border-radius: 5px;
  }
