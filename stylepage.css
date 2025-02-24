@@ -211,6 +211,14 @@ footer {
  /* Style buttons  starts from here*/
  /* Hide all profiles by default */
  .profile {
+   font-size: 16px;
+   line-height: 1.6;
+   padding: 15px;
+   background: #f0f8ff; /* Very light baby blue background */
+   border-left: 5px solid #ADD8E6; /* Baby blue border */
+   border-radius: 5px;
+   max-width: 600px;
+   margin: 20px auto;
    display: none;
  }
  
