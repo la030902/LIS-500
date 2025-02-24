@@ -203,3 +203,7 @@ footer {
    margin: 20px auto;
    display: none;
 }
+
+.description.active {
+   display: block;
+ }
