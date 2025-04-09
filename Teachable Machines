@@ -1,57 +1,64 @@
-// Add some header info
-// For TM template code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Classifier</title>
+  <!-- p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.dom.min.js"></script>
+  <!-- ml5.js -->
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <style>
+    body { text-align: center; background-color: #111; color: white; }
+    canvas { margin-top: 20px; }
+  </style>
+</head>
+<body>
 
-// Video
-let video;
-let classifier;
-let label = 'waiting...';
+  <h1>My Video Classifier</h1>
+  <p id="status">Loading model...</p>
 
-// STEP 1: Load the model!
-function preload(){
-  classifier = ml5.ImageClassfier("https://teachablemachine.withgoogle.com/models/[...]")
-  
-}
+  <script>
+    let video;
+    let classifier;
+    let label = 'waiting...';
 
-function setup() {
-  createCanvas(640, 520);
-  // Create the video
-  video = createCapture(VIDEO);
-  video.hide();
+    // Load the model
+    function preload() {
+      classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/YOUR_MODEL_URL/model.json');
+    }
 
-  // STEP 2: Start classifying
-}
+    function setup() {
+      createCanvas(640, 520);
+      video = createCapture(VIDEO);
+      video.hide();
+      classifyVideo();
+      document.getElementById('status').innerText = 'Model loaded. Classifying...';
+    }
 
-classifyVideo();
+    function draw() {
+      background(0);
+      image(video, 0, 0);
+      fill(255);
+      textSize(32);
+      textAlign(CENTER, CENTER);
+      text(label, width / 2, height - 16);
+    }
 
-function classifyVideo(){
-  classifier.classify (video, gotResults); 
-}
+    function classifyVideo() {
+      classifier.classify(video, gotResults);
+    }
 
-// STEP 2 classify!
+    function gotResults(error, results) {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      label = results[0].label;
+      classifyVideo();
+    }
+  </script>
 
-function draw() {
-  background(0);
-  
-  // Draw the video
-  image(video, 0, 0);
+</body>
+</html>
 
-  // STEP 4: Draw the label
-  textSize(32);
-  textAlign(CENTER, CENTER);
-  fill(255);
-  text(label, width/2, height - 16);
-}
-
-
-// STEP 3: Get the classification!
-
-function getResults(error, resilts){
-  if (error){
-    console.error(error);
-    return;
-  }
-  
-  label = results[0].label;
-  classifyVideo();
-  
-} 
