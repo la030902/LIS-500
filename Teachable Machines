@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Video Classifier</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teachable Machine</title>
+  <link rel="stylesheet" href="stylepage.css" />
+
+  <!-- Required Libraries for p5.js + ml5.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.dom.min.js"></script>
   <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+
   <style>
-    body { text-align: center; background-color: #111; color: white; }
-    canvas { margin-top: 20px; }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      margin-top: 30px;
+    }
+    #canvas-container {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -19,28 +31,34 @@
       <li><a href="about us.html">About</a></li>
       <li><a href="resource.html">Resources</a></li>
       <li><a href="tech hero.html">Tech Hero</a></li>
-      <li><a href="classifier.html">Classifier</a></li> 
+      <li><a href="teachable.html">Teachable Machines</a></li>
     </ul>
   </nav>
 
-  <h1>Video Classifier</h1>
-  <p id="status">Loading model...</p>
+  <section id="canvas-container">
+    <h2>Live Video Classifier</h2>
+    <p id="label-display">Label: <span id="label">waiting...</span></p>
+  </section>
+
+  <footer>
+    <p>&copy; Joan Lee, Madison Sveum, Ann Teoh. LIS 500 Project2</p>
+  </footer>
 
   <script>
     let video;
     let classifier;
-    let label = 'waiting...';
+    let label = "waiting...";
 
     function preload() {
-      classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/YOUR_MODEL_URL/model.json');
+      classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/[your-model-path]/model.json");
     }
 
     function setup() {
-      createCanvas(640, 520);
+      createCanvas(640, 520).parent("canvas-container");
       video = createCapture(VIDEO);
+      video.size(640, 520);
       video.hide();
       classifyVideo();
-      document.getElementById('status').innerText = 'Model loaded. Classifying...';
     }
 
     function draw() {
@@ -50,6 +68,7 @@
       textSize(32);
       textAlign(CENTER, CENTER);
       text(label, width / 2, height - 16);
+      document.getElementById("label").innerText = label;
     }
 
     function classifyVideo() {
@@ -65,11 +84,8 @@
       classifyVideo();
     }
   </script>
-
-  <footer>
-    <p>&copy; Joan Lee, Madison Sveum, Ann Teoh. LIS 500 Project2</p>
-  </footer>
 </body>
 </html>
+
 
 
