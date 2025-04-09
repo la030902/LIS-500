@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Video Classifier</title>
-  <!-- p5.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.dom.min.js"></script>
-  <!-- ml5.js -->
   <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
   <style>
     body { text-align: center; background-color: #111; color: white; }
@@ -14,8 +12,18 @@
   </style>
 </head>
 <body>
+  <nav>
+    <div class="logo">LIS 500 Project</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Welcome</a></li>
+      <li><a href="about us.html">About</a></li>
+      <li><a href="resource.html">Resources</a></li>
+      <li><a href="tech hero.html">Tech Hero</a></li>
+      <li><a href="classifier.html">Classifier</a></li> <!-- 🔥 new nav link -->
+    </ul>
+  </nav>
 
-  <h1>My Video Classifier</h1>
+  <h1>Video Classifier</h1>
   <p id="status">Loading model...</p>
 
   <script>
@@ -23,7 +31,6 @@
     let classifier;
     let label = 'waiting...';
 
-    // Load the model
     function preload() {
       classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/YOUR_MODEL_URL/model.json');
     }
@@ -59,6 +66,10 @@
     }
   </script>
 
+  <footer>
+    <p>&copy; Joan Lee, Madison Sveum, Ann Teoh. LIS 500 Project2</p>
+  </footer>
 </body>
 </html>
+
 
