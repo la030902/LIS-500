@@ -19,7 +19,7 @@
       <li><a href="about us.html">About</a></li>
       <li><a href="resource.html">Resources</a></li>
       <li><a href="tech hero.html">Tech Hero</a></li>
-      <li><a href="classifier.html">Classifier</a></li> <!-- 🔥 new nav link -->
+      <li><a href="classifier.html">Classifier</a></li> 
     </ul>
   </nav>
 
