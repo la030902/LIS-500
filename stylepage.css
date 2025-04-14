@@ -271,3 +271,32 @@ footer {
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   text-align: left;
 }
+
+.introduction {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+  background-color: #f5f7fa;
+}
+
+.intro-container {
+  max-width: 800px;
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.intro-container h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+.intro-container p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 20px;
+}
