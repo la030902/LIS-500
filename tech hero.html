@@ -71,7 +71,13 @@
         </div>
       </section>
 
-
+      <script>
+        function showDescription(person) {
+          document.querySelectorAll('.description').forEach(desc => desc.style.display = 'none');
+          document.getElementById(person).style.display = 'block';
+        }
+      </script>
+    
       
    <footer>
     <p>&copy; Joan Lee, Madison Sveum, Ann Teoh. LIS 500 Project2</p>
