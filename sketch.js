@@ -1,17 +1,21 @@
 let video;
 let classifier;
 let label = 'waiting...';
-let stopImg, rainbowImg, ukuleleImg;
+let stopImg, yieldImg, streetImg;
 
+function preload() {
+  classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/bXy2kDNi/model.json');
+  stopImg   = loadImage("images/stop.webp");
+  yieldImg  = loadImage("images/yield.jpg");
+  streetImg = loadImage("images/street.jpg");
+}
 
 function setup() {
   let canvas = createCanvas(640, 520);
   canvas.parent("canvas-container");
-
   video = createCapture(VIDEO);
   video.size(640, 520);
   video.hide();
-
   classifyVideo();
 }
 
@@ -24,13 +28,6 @@ function draw() {
   textAlign(CENTER, CENTER);
   text(label, width / 2, height - 16);
 
-  function preload() {
-    classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/bXy2kDNi/model.json');
-    stopImg = loadImage("images/stop.webp");
-    yieldImg = loadImage("images/yield.jpg");
-    streetImg = loadImage("images/street.jpg");
-  };
-  
   if (label === "Stop") {
     image(stopImg, 100, 100, 100, 100);
   } else if (label === "Yield") {
@@ -50,5 +47,5 @@ function gotResults(error, results) {
     return;
   }
   label = results[0].label;
-  classifyVideo(); // keep classifying in a loop
+  classifyVideo();
 }
