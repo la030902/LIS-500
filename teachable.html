@@ -77,6 +77,13 @@
   </div>
 </section>
 
+<script>
+  function showDescription(person) {
+    document.querySelectorAll('.description').forEach(desc => desc.style.display = 'none');
+    document.getElementById(person).style.display = 'block';
+  }
+</script>
+
 
   <script src="sketch.js"></script>
 
