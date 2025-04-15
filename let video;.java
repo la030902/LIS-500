@@ -1,55 +1,68 @@
-let video;
-let classifier;
-let label = 'waiting...';
-let confidence = 0;
+<script>
+  const URL = "https://teachablemachine.withgoogle.com/models/lsBrn0MsP/";
 
-// STEP 1: Load the model!
-let modelURL = 'https://teachablemachine.withgoogle.com/models/lsBrn0MsP/';
-function preload() {
-  classifier = ml5.imageClassifier(modelURL + 'model.json');
-}
-function setup() {
-  createCanvas(640, 520);
-  video = createCapture(VIDEO);
-  video.size(640, 520);
-  video.hide();
+  let model, webcam, labelContainer, maxPredictions;
 
-  // STEP 2: Start classifying
-  classifyVideo();
-}
+  // Load the image model and setup the webcam
+  async function init() {
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
 
-function draw() {
-  background(0);
-  image(video, 0, 0);
+    // Show loading message
+    labelContainer = document.getElementById("label-container");
+    labelContainer.innerHTML = "<div>Loading model...</div>";
 
-  // STEP 4: Draw the label
-  fill(255);
-  textSize(32);
-  textAlign(CENTER, CENTER);
-  text(label + ' (' + nf(confidence * 100, 2, 1) + '%)', width / 2, height - 16);}
+    // Load the model and metadata
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
 
-// STEP 3: Get classification result
-function classifyVideo() {
-  classifier.classify(video, gotResults);
-}
-
-function gotResults(error, results) {
-  if (error) {
-    console.error(error);
-    return;
+    // Setup webcam
+    const flip = true; // whether to flip the webcam
+    webcam = new tmImage.Webcam(400, 400, flip); // width, height, flip
+    await webcam.setup(); // request access to the webcam
+    await webcam.play();
+    
+    // Append webcam to container
+    document.getElementById("webcam-container").appendChild(webcam.canvas);
+    
+    // Update loading message
+    labelContainer.innerHTML = "";
+    for (let i = 0; i < maxPredictions; i++) {
+      labelContainer.appendChild(document.createElement("div"));
+    }
+    
+    // Start prediction loop
+    window.requestAnimationFrame(loop);
   }
 
-    if (newLabel === "Stop Sign") {
-    label = "🛑 Stop Sign";
-  } else if (newLabel === "Yield Sign") {
-    label = "⚠️ Yield Sign";
-  } else if (newLabel === "Street Sign") {
-    label = "🚧 Street Sign";
-  } else {
-    label = newLabel;
+  async function loop() {
+    webcam.update(); // update the webcam frame
+    await predict();
+    window.requestAnimationFrame(loop);
   }
-  
-  label = results[0].label;
-  confidence = results[0].confidence;
-  classifyVideo();
-}
+
+  // Run the webcam image through the image model
+  async function predict() {
+    // Predict can take in an image, video or canvas HTML element
+    const prediction = await model.predict(webcam.canvas);
+    for (let i = 0; i < maxPredictions; i++) {
+      const classPrediction =
+        prediction[i].className + ": " + 
+        (prediction[i].probability * 100).toFixed(2) + "%";
+
+      // Change label text to emoji and class name based on the prediction
+      if (prediction[i].className === 'Street sign') {
+        labelContainer.childNodes[i].innerHTML = '🚧 ' + classPrediction;
+      } else if (prediction[i].className === 'Yield sign') {
+        labelContainer.childNodes[i].innerHTML = '⚠️ ' + classPrediction;
+      } else if (prediction[i].className === 'Stop sign') {
+        labelContainer.childNodes[i].innerHTML = '🛑 ' + classPrediction;
+      } else {
+        labelContainer.childNodes[i].innerHTML = classPrediction;
+      }
+    }
+  }
+
+  // Call init to load the model and start the prediction process
+  init();
+</script>
