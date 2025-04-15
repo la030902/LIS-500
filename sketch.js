@@ -10,6 +10,11 @@ function preload() {
   streetImg = loadImage("images/street.jpg");
 }
 
+function modelReady() {
+  console.log('Model Loaded!');
+  classifyVideo();
+}
+
 function setup() {
   let canvas = createCanvas(640, 520);
   canvas.parent("canvas-container");
