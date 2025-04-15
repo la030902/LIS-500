@@ -1,9 +1,10 @@
 let video;
 let classifier;
 let label = 'waiting...';
+let confidence = 0;
 
 // STEP 1: Load the model!
-let modelURL = 'https://teachablemachine.withgoogle.com/models/bXy2kDNi/';
+let modelURL = 'https://teachablemachine.withgoogle.com/models/lsBrn0MsP/';
 function preload() {
   classifier = ml5.imageClassifier(modelURL + 'model.json');
 }
@@ -25,8 +26,7 @@ function draw() {
   fill(255);
   textSize(32);
   textAlign(CENTER, CENTER);
-  text(label, width / 2, height - 16);
-}
+  text(label + ' (' + nf(confidence * 100, 2, 1) + '%)', width / 2, height - 16);}
 
 // STEP 3: Get classification result
 function classifyVideo() {
@@ -38,6 +38,18 @@ function gotResults(error, results) {
     console.error(error);
     return;
   }
+
+    if (newLabel === "Stop Sign") {
+    label = "🛑 Stop Sign";
+  } else if (newLabel === "Yield Sign") {
+    label = "⚠️ Yield Sign";
+  } else if (newLabel === "Street Sign") {
+    label = "🚧 Street Sign";
+  } else {
+    label = newLabel;
+  }
+  
   label = results[0].label;
+  confidence = results[0].confidence;
   classifyVideo();
 }
