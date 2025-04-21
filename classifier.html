@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teachable Machine Classifier</title>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    video { width: 320px; height: 240px; }
+  </style>
+</head>
+<body>
+  <h1>Webcam Classifier</h1>
+  <video id="webcam" autoplay></video>
+  <p id="prediction">Loading model...</p>
+
+  <script type="text/javascript">
+    const URL = "your-model-link-here/";
+    let model, webcam, labelContainer, maxPredictions;
+
+    async function init() {
+      const modelURL = URL + "model.json";
+      const metadataURL = URL + "metadata.json";
+
+      model = await tmImage.load(modelURL, metadataURL);
+      maxPredictions = model.getTotalClasses();
+
+      webcam = new tmImage.Webcam(320, 240, true);
+      await webcam.setup();
+      await webcam.play();
+      window.requestAnimationFrame(loop);
+
+      document.getElementById("webcam").appendChild(webcam.canvas);
+    }
+
+    async function loop() {
+      webcam.update();
+      const prediction = await model.predict(webcam.canvas);
+      prediction.sort((a, b) => b.probability - a.probability);
+      document.getElementById("prediction").innerText = `${prediction[0].className}: ${(prediction[0].probability * 100).toFixed(2)}%`;
+      window.requestAnimationFrame(loop);
+    }
+
+    init();
+  </script>
+</body>
+</html>
 
