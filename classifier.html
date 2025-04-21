@@ -1,56 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Teachable Machine Classifier</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ml5/0.12.2/ml5.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Traffic Sign Classifier</title>
+
+  <!-- Font: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Stylepage link -->
+  <link rel="stylesheet" href="css/stylepage.css">
+
+  <!-- Load p5.js and ml5.js libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
-<body>
+
+<body class="traffic-sign-classifier">
+  <h2>Traffic Sign Classification</h2>
+
+  <div class="model-tabs">
+    <button class="tab-btn active" onclick="openTab('try-tab')">Try Our Model</button>
+  </div>
+  
+  <!-- Try Tab Content -->
+  <div id="try-tab" class="tab-content active-tab">
+    <div id="model-container">
+      <p class="webcam-instructions">Hold up a street sign, yield sign, or stop sign to your webcam:</p>
+      <button type="button" class="webcam-btn" onclick="init()">Start Webcam</button>
+      <div id="webcam-container"></div>
+      <div id="label-container"></div>
+    </div>
+  </div>
+
+  <h3>Check Out The Code</h3>
+  <div class="links">
+    <a href="https://github.com/owusu21/LIS500_Project2" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+  </div>
+
   <script>
-    let video;
-    let classifier;
-    let label = 'loading model...';
-    let confidence = 0;
+    // Define the URL for the model (using the provided URL)
+    const URL = "https://teachablemachine.withgoogle.com/models/lsBrn0MsP/";
 
-    let modelURL = 'https://teachablemachine.withgoogle.com/models/m5rJvZ8zO/';
+    let model, webcam, labelContainer, maxPredictions;
 
-    function preload() {
-      classifier = ml5.imageClassifier(modelURL + 'model.json');
+    // Initialize the webcam and the model
+    async function init() {
+      const modelURL = URL + "model.json";
+      const metadataURL = URL + "metadata.json";
+
+      // Hide the button once clicked and show loading message
+      document.querySelector('.webcam-btn').style.display = 'none';
+      labelContainer = document.getElementById("label-container");
+      labelContainer.innerHTML = "<div>Loading model...</div>";
+
+      // Load the model and setup webcam
+      model = await tmImage.load(modelURL, metadataURL);
+      maxPredictions = model.getTotalClasses();
+
+      const flip = true; // Mirror effect on webcam
+      webcam = new tmImage.Webcam(400, 400, flip);
+      await webcam.setup();
+      await webcam.play();
+
+      document.getElementById("webcam-container").appendChild(webcam.canvas);
+      labelContainer.innerHTML = ""; // Remove "loading" text
+
+      // Add a div for each label (street sign, yield sign, stop sign)
+      for (let i = 0; i < maxPredictions; i++) {
+        labelContainer.appendChild(document.createElement("div"));
+      }
+
+      // Start the loop for continuous prediction
+      window.requestAnimationFrame(loop);
     }
 
-    function setup() {
-      createCanvas(640, 520);
-      video = createCapture(VIDEO);
-      video.size(640, 520);
-      video.hide();
-      classifyVideo();
+    // Loop to continuously update the predictions
+    async function loop() {
+      webcam.update(); // Update the webcam feed
+      await predict(); // Make predictions
+      window.requestAnimationFrame(loop); // Loop again
     }
 
-    function draw() {
-      background(0);
-      image(video, 0, 0);
-
-      fill(255);
-      textSize(32);
-      textAlign(CENTER, CENTER);
-      text(label + ' (' + nf(confidence * 100, 2, 1) + '%)', width / 2, height - 16);
-    }
-
-    function classifyVideo() {
-      if (classifier && video) {
-        classifier.classify(video, gotResults);
+    // Function to predict the class of the image
+    async function predict() {
+      const prediction = await model.predict(webcam.canvas);
+      for (let i = 0; i < maxPredictions; i++) {
+        const classPrediction =
+          prediction[i].className + ": " + 
+          (prediction[i].probability * 100).toFixed(2) + "%";
+        labelContainer.childNodes[i].innerHTML = classPrediction;
       }
     }
 
-    function gotResults(error, results) {
-      if (error) {
-        console.error(error);
-        return;
+    // Tab functionality to show the right content
+    function openTab(tabId) {
+      const tabContents = document.getElementsByClassName('tab-content');
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove('active-tab');
       }
-      label = results[0].label;
-      confidence = results[0].confidence;
-      classifyVideo();
+
+      const tabButtons = document.getElementsByClassName('tab-btn');
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove('active');
+      }
+
+      document.getElementById(tabId).classList.add('active-tab');
+      event.currentTarget.classList.add('active');
     }
   </script>
 </body>
