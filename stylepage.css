@@ -302,20 +302,5 @@ img {
 }
 
 
-.webcam-btn {
-  font-family: 'sans-serif', sans-serif;  
-}
 
-#model-container {
-  margin: 40px auto;
-  padding: 25px;
-  background: #F9EAE3;
-  border-radius: 12px;
-  max-width: 650px;
-  box-shadow: 0 4px 15px rgba(75, 59, 71, 0.2);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
