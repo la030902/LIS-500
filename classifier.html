@@ -2,37 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Webcam Classifier</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      font-family: sans-serif;
-      background-color: #111;
-      color: #fff;
-    }
-    canvas {
-      display: block;
-      margin: 0 auto;
-    }
-  </style>
-  <!-- p5.js and ml5.js libraries -->
+  <title>Teachable Machine Classifier</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.dom.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ml5/0.12.2/ml5.min.js"></script>
 </head>
 <body>
-  <h1>Live Webcam Classifier</h1>
-  <p>This page uses Teachable Machine + ml5.js to classify what the webcam sees.</p>
-
   <script>
     let video;
     let classifier;
-    let label = 'waiting...';
+    let label = 'loading model...';
     let confidence = 0;
 
-    let modelURL = 'https://teachablemachine.withgoogle.com/models/lsBrn0MsP/';
+    let modelURL = 'https://teachablemachine.withgoogle.com/models/m5rJvZ8zO/';
 
     function preload() {
       classifier = ml5.imageClassifier(modelURL + 'model.json');
@@ -50,7 +31,6 @@
       background(0);
       image(video, 0, 0);
 
-      // Draw the label
       fill(255);
       textSize(32);
       textAlign(CENTER, CENTER);
@@ -68,10 +48,9 @@
         console.error(error);
         return;
       }
-
       label = results[0].label;
       confidence = results[0].confidence;
-      classifyVideo(); // loop
+      classifyVideo();
     }
   </script>
 </body>
