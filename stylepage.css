@@ -1,14 +1,14 @@
-
+/* Importing Google Font 'Poppins' with different font weights */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
-
+/* Global Reset and Box Sizing */
 * {
    margin: 0;
    padding: 0;
    box-sizing: border-box;
 }
 
-
+/* Body Styling */
 body {
    font-family: "Poppins", sans-serif;
    background-color: #f4f4f4;
@@ -16,19 +16,19 @@ body {
    line-height: 1.6;
 }
 
-
+/* Enables smooth scrolling when clicking anchor links */
 html {
    scroll-behavior: smooth;
 }
 
-
+/* Navigation Bar Styling */
 nav {
    background-color: #343a40;
    padding: 15px;
    text-align: center;
 }
 
-
+/* Navigation links styled as a horizontal flex row */
 .nav-links {
    display: flex;
    justify-content: center;
@@ -37,20 +37,20 @@ nav {
    font-size: 1.2rem;
 }
 
-
+/* Styling individual nav links */
 .nav-links a {
    color: white;
    text-decoration: none;
    transition: color 0.3s;
 }
 
-
+/* Hover effect on nav links */
 .nav-links a:hover {
    color: #ffdd57;
    text-decoration: underline;
 }
 
-
+/* Logo styling inside nav */
 .logo {
    font-size: 2rem;
    color: white;
@@ -58,7 +58,7 @@ nav {
    text-align: center;
 }
 
-
+/* General container styling for centered content blocks */
 .container {
    max-width: 900px;
    margin: 40px auto;
@@ -69,7 +69,7 @@ nav {
    text-align: center;
 }
 
-
+/* Headings */
 h1, h2 {
    font-size: 2.5rem;
    color: #343a40;
@@ -80,6 +80,7 @@ h3 {
    color: #343a40;
 }
 
+/* Paragraph styling */
 p {
    font-size: 1.1rem;
    color: rgb(85, 85, 85);
@@ -87,7 +88,7 @@ p {
    margin-bottom: 20px;
 }
 
-
+/* Button styling */
 .button {
    display: inline-block;
    background-color: #b9d9fb;
@@ -99,19 +100,18 @@ p {
    transition: background-color 0.3s;
 }
 
-
+/* Button hover effect */
 .button:hover {
    background-color: #b9d9fb;
 }
 
-
-/* Sections */
+/* General section padding and alignment */
 section {
    padding: 60px 20px;
    text-align: center;
 }
 
-
+/* Hero/splash section with gradient background */
 .splash {
    background: linear-gradient(to right, #b9d9fb, #9accfb);
    color: white;
@@ -119,45 +119,41 @@ section {
    border-radius: 0 0 30px 30px;
 }
 
-
+/* Unordered list reset */
 ul {
-
-  list-style: none;
+   list-style: none;
    padding: 0;
 }
 
-
+/* List items styling */
 ul li {
    margin: 10px 0;
    font-size: 1.2rem;
 }
 
-
+/* Links inside list items */
 ul li a {
    color: #343a40;
    text-decoration: none;
    /* font-weight: bold; */
 }
 
-
+/* Hover effect for list links */
 ul li a:hover {
    text-decoration: underline;
 }
 
-
+/* Footer styling */
 footer {
    background-color: #dae6f1;
-   color: ADD8E6;
+   color: ADD8E6; /* This should be fixed; ADD8E6 is a hex code but not in quotes */
    text-align: center;
    padding: 20px;
    margin-top: 40px;
    font-size: 1rem;
 }
 
-
-
-
-/* Centered Buttons */
+/* Container for centering multiple buttons */
 .buttons {
    margin-bottom: 20px;
    display: flex;
@@ -165,12 +161,11 @@ footer {
    gap: 15px;
 }
 
-
-/* Baby Blue Buttons */
+/* Style for baby blue buttons */
 .profile-btn {
-   background-color: #b9d9fb; /* Baby blue */
+   background-color: #b9d9fb;
    border: none;
-   color: #333; /* Dark gray for contrast */
+   color: #333;
    padding: 12px 24px;
    font-size: 16px;
    font-weight: 500;
@@ -179,81 +174,81 @@ footer {
    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
+/* Hover effect for profile button */
 .profile-btn:hover {
-   background-color: #9ac7db; /* Slightly darker baby blue */
+   background-color: #9ac7db;
    transform: scale(1.05);
 }
 
-
+/* Click (active) effect for profile button */
 .profile-btn:active {
    transform: scale(0.95);
 }
 
-
-/* Description Box */
+/* Collapsible description box styling */
 .description {
    font-size: 16px;
    line-height: 1.6;
    padding: 15px;
-   background: #f0f8ff; /* Very light baby blue background */
-   border-left: 5px solid #ADD8E6; /* Baby blue border */
+   background: #f0f8ff;
+   border-left: 5px solid #ADD8E6;
    border-radius: 5px;
    max-width: 600px;
    margin: 20px auto;
    display: none;
 }
 
+/* Make the description visible when active */
 .description.active {
    display: block;
- }
+}
 
- /* Style buttons  starts from here*/
- /* Hide all profiles by default */
- .profile {
+/* Generic profile box hidden by default */
+.profile {
    font-size: 16px;
    line-height: 1.6;
    padding: 15px;
-   background: #f0f8ff; /* Very light baby blue background */
-   border-left: 5px solid #ADD8E6; /* Baby blue border */
+   background: #f0f8ff;
+   border-left: 5px solid #ADD8E6;
    border-radius: 5px;
    max-width: 600px;
    margin: 20px auto;
    display: none;
- }
- 
- /* Show profile when linked */
- .profile:target {
+}
+
+/* Show profile when targeted by URL fragment */
+.profile:target {
    display: block;
- }
- 
- .resource {
+}
+
+/* Resource box styling, hidden by default */
+.resource {
    font-size: 16px;
    line-height: 1.6;
    padding: 15px;
-   background: #f0f8ff; /* Very light baby blue background */
-   border-left: 5px solid #ADD8E6; /* Baby blue border */
+   background: #f0f8ff;
+   border-left: 5px solid #ADD8E6;
    border-radius: 5px;
    max-width: 600px;
    margin: 20px auto;
    display: none;
- }
- 
- /* Show profile when linked */
- .resource:target {
+}
+
+/* Show resource when targeted */
+.resource:target {
    display: block;
- }
- 
- img 
- {
+}
+
+/* Responsive image styling */
+img {
    max-width: 100%;
    height: auto;
    display: block;
    margin: 10px auto;
    border-radius: 5px;
- }
+}
 
-
+/* Flex grid for reflections */
 .reflection-grid {
   display: flex;
   flex-wrap: wrap;
@@ -262,6 +257,7 @@ footer {
   margin-top: 30px;
 }
 
+/* Individual reflection box styling */
 .reflection-box {
   flex: 1 1 250px;
   max-width: 300px;
@@ -272,6 +268,7 @@ footer {
   text-align: left;
 }
 
+/* Introduction section layout */
 .introduction {
   display: flex;
   justify-content: center;
@@ -279,6 +276,7 @@ footer {
   background-color: #f5f7fa;
 }
 
+/* Container for the intro content */
 .intro-container {
   max-width: 800px;
   background: white;
@@ -287,6 +285,7 @@ footer {
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
+/* Title inside the intro section */
 .intro-container h2 {
   text-align: center;
   font-size: 2em;
@@ -294,9 +293,11 @@ footer {
   color: #2c3e50;
 }
 
+/* Paragraphs inside the intro section */
 .intro-container p {
   font-size: 1.1em;
   line-height: 1.7;
   color: #333;
   margin-bottom: 20px;
 }
+
