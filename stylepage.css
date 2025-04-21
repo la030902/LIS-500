@@ -303,7 +303,7 @@ img {
 
 
 .webcam-btn {
-  font-family: 'YourFontFamily', sans-serif;  /* Change 'YourFontFamily' to your preferred font */
+  font-family: 'sans-serif', sans-serif;  
 }
 
 #model-container {
