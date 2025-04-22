@@ -15,20 +15,18 @@
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 
-<body class="traffic-sign-classifier">
-  <h2>Traffic Sign Classification</h2>
-
-  
-  
-  <!-- Try Tab Content -->
-  <div id="try-tab" class="tab-content active-tab">
-    <div id="model-container">
-      <p class="webcam-instructions">Hold up a street sign, yield sign, or stop sign to your webcam:</p>
-      <button type="button" class="webcam-btn" onclick="init()">Start Webcam</button>
-      <div id="webcam-container"></div>
-      <div id="label-container"></div>
+<body>
+  <section>
+    <div class="container">
+      <h2>Traffic Sign Classification</h2>
+      <p class="webcam-instructions">
+        Hold up a street sign, yield sign, or stop sign to your webcam:
+      </p>
+      <button type="button" class="profile-btn" onclick="init()">Start Webcam</button>
+      <div id="webcam-container" style="margin-top: 20px;"></div>
+      <div id="label-container" style="margin-top: 20px;"></div>
     </div>
-  </div>
+  </section>
 
 
   <script>
