@@ -42,8 +42,7 @@
     <p>
       For this project, we built a simple web app that can recognize traffic signs using a webcam. We trained a model with Google’s Teachable Machine to identify three types of signs—stop, street, and yield—and then integrated it into a webpage using HTML, CSS, and JavaScript. We used paired programming to complete this project. In All I Really Need to Know About Pair Programming I Learned In Kindergarten by Laurie A Williams, Robert R Kessler
 
->  the author writes, “...results demonstrate that two programmers working together are more than twice as fast and think of more than twice as many solutions to a problem than two working alone, while attaining higher defect prevention and defect removal leading to a higher quality product,". We found this to be true when facing problems in our code. 
->
+ the author writes, “...results demonstrate that two programmers working together are more than twice as fast and think of more than twice as many solutions to a problem than two working alone, while attaining higher defect prevention and defect removal leading to a higher quality product,". We found this to be true when facing problems in our code. 
     </p>
     <p>
       At first, it just seemed like a fun, hands-on way to learn about machine learning. But as we tested it more, we started noticing how easily the model could get confused. Things like lighting, camera angle, or even slight differences between signs affected the results. That made us realize how tricky it is for machines to interpret the real world, even when the task seems straightforward.
@@ -124,11 +123,13 @@ I now know that every dataset, every decision, every tool we build reflects some
 For this project, we built a simple web application that uses a webcam to recognize traffic signs in real time. Our main goal was to create an interactive demo showing how machine learning (ML) can be applied to computer vision tasks, even within a browser. We aimed to make something functional, educational, and hands-on to explore the potential and challenges of real-time image classification.
 To get started, we used Google’s Teachable Machine, an intuitive platform that allows users to train ML models without writing any code. It supports image, audio, and pose recognition, and is ideal for beginners. We trained our model to recognize three types of traffic signs: **stop signs**, yield signs, and street signs. We captured multiple images of each sign type using a webcam, making sure to include some variation in angles, lighting, and distance.
 Once trained, we exported the model and integrated it into a simple webpage using HTML, CSS, and JavaScript. The webcam feed is shown on the page, and every frame is passed to the model for classification. 
-<br>
+</p>
+    <p>
 The predicted sign and a confidence score are then displayed on the screen, giving users real-time feedback as they test different signs in front of the camera.
 Initially, the project was fun and felt like a straightforward way to understand ML. Seeing the model successfully recognize printed traffic signs was satisfying and gave us confidence in the concept. However, as we tested further, we quickly realized how sensitive the model was to its environment.
 Small changes in lighting, such as glare or shadows, often caused the model to misclassify signs. Camera angle and distance also played a big role—if the sign wasn’t positioned just right, accuracy dropped. We also discovered that visual variations between signs of the same type—like font changes or faded colors—could throw off the model. These limitations made it clear that building a reliable vision system is more complicated than it seems.
-<br>
+</p>
+    <p>
 Through this process, we gained a deeper understanding of the hallenges in machine learning and computer vision. Real-world data is unpredictable, and models need a lot of high-quality, diverse training data to be robust. Even with a tool as accessible as Teachable Machine, we saw the importance of careful testing, ongoing refinement, and understanding a model’s weaknesses.
 This project also highlighted the value of transparent design. By including confidence scores and keeping the interface simple, we made it easier to interpret the model’s predictions. Users could see not just what the model thought, but how sure it was, which helped us and others understand how well the model was performing in different scenarios.
 In the end, our traffic sign recognition app served as a practical and eye-opening experience. It helped us appreciate both the potential of machine learning and the complexity behind getting models to work well in dynamic, real-world situations. While the tool we created is basic, it reflects many core lessons of machine learning—data matters, context matters, and even small projects can teach big ideas.
