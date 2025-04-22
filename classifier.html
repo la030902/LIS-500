@@ -1,104 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Traffic Sign Classifier</title>
 
-  <!-- Font: Montserrat -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- Your existing Google Font (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css" /> <!-- 🔁 Replace with the path to your CSS -->
 
-  <!-- Load p5.js and ml5.js libraries -->
+  <!-- TensorFlow & Teachable Machine -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
+  <!-- Optional: Add webcam canvas styling here or in your CSS file -->
+  <style>
+    #webcam-container canvas {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 
 <body>
   <section>
     <div class="container">
       <h2>Traffic Sign Classification</h2>
+
       <p class="webcam-instructions">
         Hold up a street sign, yield sign, or stop sign to your webcam:
       </p>
+
       <button type="button" class="profile-btn" onclick="init()">Start Webcam</button>
+
       <div id="webcam-container" style="margin-top: 20px;"></div>
       <div id="label-container" style="margin-top: 20px;"></div>
     </div>
   </section>
 
-
   <script>
-    // Define the URL for the model (using the provided URL)
     const URL = "https://teachablemachine.withgoogle.com/models/lsBrn0MsP/";
-
     let model, webcam, labelContainer, maxPredictions;
 
-    // Initialize the webcam and the model
     async function init() {
       const modelURL = URL + "model.json";
       const metadataURL = URL + "metadata.json";
 
-      // Hide the button once clicked and show loading message
-      document.querySelector('.webcam-btn').style.display = 'none';
+      document.querySelector('.profile-btn').style.display = 'none';
       labelContainer = document.getElementById("label-container");
       labelContainer.innerHTML = "<div>Loading model...</div>";
 
-      // Load the model and setup webcam
       model = await tmImage.load(modelURL, metadataURL);
       maxPredictions = model.getTotalClasses();
 
-      const flip = true; // Mirror effect on webcam
+      const flip = true;
       webcam = new tmImage.Webcam(400, 400, flip);
       await webcam.setup();
       await webcam.play();
 
       document.getElementById("webcam-container").appendChild(webcam.canvas);
-      labelContainer.innerHTML = ""; // Remove "loading" text
+      labelContainer.innerHTML = "";
 
-      // Add a div for each label (street sign, yield sign, stop sign)
       for (let i = 0; i < maxPredictions; i++) {
         labelContainer.appendChild(document.createElement("div"));
       }
 
-      // Start the loop for continuous prediction
       window.requestAnimationFrame(loop);
     }
 
-    // Loop to continuously update the predictions
     async function loop() {
-      webcam.update(); // Update the webcam feed
-      await predict(); // Make predictions
-      window.requestAnimationFrame(loop); // Loop again
+      webcam.update();
+      await predict();
+      window.requestAnimationFrame(loop);
     }
 
-    // Function to predict the class of the image
     async function predict() {
       const prediction = await model.predict(webcam.canvas);
       for (let i = 0; i < maxPredictions; i++) {
         const classPrediction =
-          prediction[i].className + ": " + 
+          prediction[i].className + ": " +
           (prediction[i].probability * 100).toFixed(2) + "%";
         labelContainer.childNodes[i].innerHTML = classPrediction;
       }
     }
-
-    // Tab functionality to show the right content
-    function openTab(tabId) {
-      const tabContents = document.getElementsByClassName('tab-content');
-      for (let i = 0; i < tabContents.length; i++) {
-        tabContents[i].classList.remove('active-tab');
-      }
-
-      const tabButtons = document.getElementsByClassName('tab-btn');
-      for (let i = 0; i < tabButtons.length; i++) {
-        tabButtons[i].classList.remove('active');
-      }
-
-      document.getElementById(tabId).classList.add('active-tab');
-      event.currentTarget.classList.add('active');
-    }
   </script>
 </body>
 </html>
+
