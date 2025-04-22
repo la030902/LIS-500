@@ -32,7 +32,7 @@ function draw() {
   textSize(32);
   textAlign(CENTER, CENTER);
   text(label, width / 2, height - 16);
-  textFont(TimesNewRoman, 12);
+  textFont("Poppins", sans-serif, 12);
 
   if (label === "Stop") {
     image(stopImg, 100, 100, 100, 100);
